@@ -28,10 +28,10 @@ RUN \
  nuget restore Sample.sln; \
  msbuild /p:Configuration=Release Sample.sln
 
-FROM flexberry/alt.p8-apache2-mono:latest
+FROM flexberry/mono-xsp:latest
 
 MAINTAINER mail@flexberry.net
 
-COPY --from=backend /src/Sample/ODataBackend /var/www/vhosts/project/
-COPY --from=ember_app /src/ember-app/dist /var/www/vhosts/project
-COPY /src/Docker/vhosts.conf /conf
+COPY --from=backend /src/Sample/ODataBackend /app
+COPY --from=ember_app /src/ember-app/dist /app
+WORKDIR /app
